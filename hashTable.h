@@ -1,15 +1,31 @@
 #ifndef HASTABLE_H
-#define HASTABLE_H
+# define HASTABLE_H
 
-typedef struct {
-  char *key;
-  char *value;
-} ht_item;
+typedef struct s_ht_item
+{
+	char				*key;
+	char				*value;
+	struct s_ht_item	*next;
+}						t_ht_item;
 
-typedef struct {
-  int size;
-  int count;
-  ht_item **items;
-} ht_hash_table;
+typedef struct s_ht_table
+{
+	int					size;
+	int					count;
+	t_ht_item			**items;
+}						t_ht_hash_table;
+
+t_ht_item			*ht_new_item(const char *k, const char *v);
+t_ht_hash_table		*ht_new_table();
+void				ht_del_item(t_ht_item *item);
+void				ht_del_table(t_ht_hash_table *table);
+static int			ht_handle_collision(const char *s, const int num_buckets, const int attempt);
+static int			ht_hash(const char *s, const int a, const int m);
+
+// ________________ HASH TABLE METHODS ________________ //
+
+void				ht_insert(ht_hash_table *ht, const char *key, const char *value);
+char				*ht_search(ht_hash_table *ht, const char *key);
+void				ht_delete(ht_hash_table *h, const char *key);
 
 #endif
