@@ -2,6 +2,7 @@
 *.d
 
 # .vscode folder
+vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
