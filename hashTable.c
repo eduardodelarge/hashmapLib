@@ -1,7 +1,4 @@
 #include "hashTable.h"
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
 
 /**
 * @brief initialization of ht_items. Allocates a chunk of memory the size of an ht_item and saves a copy of the strings k and v in the new chunk.
@@ -11,12 +8,13 @@
  */
 static t_ht_item*	ht_new_item(const char *k, const char *v)
 {
-	t_ht_item	item;
+	t_ht_item *item;
 
-	item.key = strdup(k);
-	item.value = strdup(v);
-	item.next = NULL;
-	return (t_ht_item*)malloc(sizeof(t_ht_item));
+	item = (t_ht_item*)malloc(sizeof(t_ht_item));
+	item->key = strdup(k);
+	item->value = strdup(v);
+	item->next = NULL;
+	return (item);
 }
 
 /**
@@ -68,12 +66,12 @@ void ht_del_table(t_ht_hash_table *table)
 }
 
 /**
- /*@brief Handles collisions by double hashing.
- /*
- /*@param s 
- /*@param num_buckets 
- /*@param attempt 
- /*@return int 
+ *@brief Handles collisions by double hashing.
+ *
+ *@param s 
+ *@param num_buckets 
+ *@param attempt 
+ *@return int 
  */
 static int ht_handle_collision(const char *s, const int num_buckets, const int attempt)
 {
